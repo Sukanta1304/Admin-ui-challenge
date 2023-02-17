@@ -28,7 +28,7 @@ function Users({id,name,email,role,handleDelete,users,setUsers,handleCheckbox,ch
         
     }
   return (
-    <tr key={id}>
+    <tr key={id} style={{backgroundColor: checked? "#e6e6e6":"white"}}>
         <td>
             <input type="checkbox" checked={checked} onChange={(e)=>handleCheckbox(e,id)}/>
         </td>

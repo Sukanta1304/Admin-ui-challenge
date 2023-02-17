@@ -5,18 +5,26 @@ import Users from './Users';
 import {AiOutlineDoubleLeft,AiOutlineDoubleRight,AiOutlineRight,AiOutlineLeft} from 'react-icons/ai';
 
 function Admin() {
-    const [selectall,SetselectAll]= useState(false);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    //const [text, setText] = useState("");
-    //const [total, setTotal] = useState(0);
+
+    // Select all the checkboxes by 'select all' checkbox --
+
     const handleChange=(e)=>{
-        SetselectAll(e.target.checked)
+        const startIndex= page*10-10;
+        const endIndex= page*10;
+        const updatedbox= users.map((user,index)=>{
+            if(index>=startIndex && index<endIndex){
+                return {...user,checked:e.target.checked};
+            }
+            return user ; 
+        });
+        setUsers(updatedbox);
     }
 
 
-    // console.log(selectall)
+    // getting data by dynamically pages 
 
     useEffect(() => {
         setLoading(true);
@@ -28,13 +36,15 @@ function Admin() {
         });
     }, [page])
 
-    //console.log(users);
+    // delete single user---
 
     const handleDelete=(id)=>{
         console.log(id);
      let updated=users.filter((user)=> user.id!==id);
      setUsers(updated);
     }
+
+    // search by any field - email,name,role.
 
     const handleSearch=(e)=>{
        let text= e.target.value;
@@ -43,11 +53,15 @@ function Admin() {
             setUsers(updated)
     }
 
+    // select multiple checkboxes---
+
     const handleCheckbox= (e,el)=>{
         const updatedel = users.map(u => u.id === el ? { ...u, checked: e.target.checked } : u);
         setUsers(updatedel)
     }
 
+    // delete multiple users --
+    
     const handleDeleteSelected=()=>{
         const updateU = users.filter(u => !u.checked);
         setUsers(updateU)
