@@ -34,7 +34,7 @@ function Admin() {
             setUsers(res);
             setLoading(false)
         });
-    }, [page])
+    }, [])
 
     // delete single user---
 
