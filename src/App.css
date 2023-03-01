@@ -107,3 +107,16 @@ table{
   border-radius: 50%;
   border: none;
 }
+
+
+.cancel-btn{
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+}
+
+.save-btn{
+  background-color: green;
+  border: none;
+  border-radius: 5px;
+}

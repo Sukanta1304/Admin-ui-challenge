@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {FiEdit} from 'react-icons/fi';
 import {AiOutlineDelete} from 'react-icons/ai';
+import {RxCross2} from 'react-icons/rx';
+import {MdDone} from 'react-icons/md';
 
 function Users({id,name,email,role,handleDelete,users,setUsers,handleCheckbox,checked}) {
     //console.log(id,name,email,role);
@@ -17,7 +19,7 @@ function Users({id,name,email,role,handleDelete,users,setUsers,handleCheckbox,ch
     const handleUpdate=(userid)=>{
         
         if(username==""|| useremail==""|| userrole==""){
-          alert(`Empty fields can't be empty`)
+          alert(`Empty fields can't be saved`)
         }else{
            let updatedUser= users.map((el)=> el.id==userid? {...el,userid,name: username,email:useremail,role:userrole}:el);
            setUsers(updatedUser);
@@ -43,8 +45,8 @@ function Users({id,name,email,role,handleDelete,users,setUsers,handleCheckbox,ch
         </td>
         <td>
             {editable? <div>
-              <button onClick={()=>handleUpdate(id)}>Save</button>
-              <button onClick={()=>setEditable(false)}>Cancel</button>
+              <button onClick={()=>handleUpdate(id)} className='save-btn'><MdDone color='white'/></button>
+              <button onClick={()=>setEditable(false)} className='cancel-btn'><RxCross2 color='white'/></button>
               </div>:<button onClick={handleEdit}><FiEdit/></button>}
             <button onClick={()=>handleDelete(id)}><AiOutlineDelete color='red'/></button>
             
